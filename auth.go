@@ -7,13 +7,14 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	jwtgo "github.com/golang-jwt/jwt"
-	"github.com/gin-gonic/gin"
 	"log"
 	"math/big"
 	"net/http"
 	"strings"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	jwtgo "github.com/golang-jwt/jwt"
 )
 
 var (
@@ -153,7 +154,7 @@ func (mw *AuthMiddleware) middlewareImpl(c *gin.Context) {
 }
 
 func (mw *AuthMiddleware) jwtFromHeader(c *gin.Context, key string) (string, error) {
-	authHeader := c.Request.Header.Get(key)
+	authHeader := c.Request.Header.Get("Authorization")
 
 	if authHeader == "" {
 		return "", AuthHeaderEmptyError
